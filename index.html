@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <style>
+        /* Reset margins and padding for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body background and layout */
+        body {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            font-family: sans-serif; /* Sans-serif font */
+            overflow: hidden; /* Prevents scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Birthday container */
+        #birthday-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Confetti container */
+        #confetti-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Birthday image (your girlfriend's image) */
+        #birthday-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        /* Birthday message */
+        #birthday-message {
+            font-size: 2em;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s 1s;
+        }
+
+        /* Special message */
+        #special-message {
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 2s 2s;
+        }
+
+        /* Confetti style */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Confetti animation */
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Transition for confetti falling animation */
+        .confetti-fall {
+            animation: confetti-fall linear infinite;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="birthday-container">
+        <!-- Confetti container -->
+        <div id="confetti-container"></div>
+
+        <!-- Birthday image (your girlfriend's picture) -->
+        <img id="birthday-image" src="img1.jpg" alt="Your Girlfriend's Image">
+
+        <!-- Birthday message -->
+        <div id="birthday-message">
+            <h1>Happy Birthday, My Love! 🎉</h1>
+        </div>
+
+        <!-- Special message -->
+        <div id="special-message">
+            <p>
+                I hope this day brings you as much joy as you bring to me every single day. 💖<br>
+                I am so grateful for every moment we spend together. You make my life brighter and more beautiful. 🌸<br>
+                You are my everything. ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Function to create confetti effect
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti');
+
+                // Randomly set the position and color of confetti
+                confettiPiece.style.left = `${Math.random() * 100}vw`;
+                confettiPiece.style.top = `${Math.random() * -100}vh`;
+                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+                // Random animation duration between 2s and 5s
+                confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+                // Append confetti piece to confetti container
+                document.getElementById('confetti-container').appendChild(confettiPiece);
+                confettiPiece.classList.add('confetti-fall');
+            }
+        }
+
+        // Function to handle the fading of elements
+        function handleAnimations() {
+            // Get elements
+            const birthdayImage = document.getElementById('birthday-image');
+            const birthdayMessage = document.getElementById('birthday-message');
+            const specialMessage = document.getElementById('special-message');
+
+            // Fade in birthday image
+            birthdayImage.style.opacity = 1;
+
+            // Fade in birthday message after image
+            setTimeout(() => {
+                birthdayMessage.style.opacity = 1;
+            }, 2000);
+
+            // Fade in special message after birthday message
+            setTimeout(() => {
+                specialMessage.style.opacity = 1;
+            }, 4000);
+        }
+
+        // Call the functions
+        window.onload = () => {
+            // Create confetti
+            createConfetti();
+
+            // Handle fade-in animations
+            handleAnimations();
+        };
+    </script>
+
+</body>
+
+</html>
