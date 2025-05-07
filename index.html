@@ -1,171 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love!</title>
-    <style>
-        /* Reset margins and padding for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, My Love!</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Body background and layout */
-        body {
-            background-color: #000; /* Black background */
-            color: #fff; /* White text */
-            font-family: sans-serif; /* Sans-serif font */
-            overflow: hidden; /* Prevents scrolling */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #2e2e2e, #4b0082); /* Darker background gradient */
+      color: #ff1493; /* Bright pink text color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      font-weight: bold; /* Bold text */
+    }
 
-        /* Birthday container */
-        #birthday-container {
-            position: relative;
-            z-index: 1;
-        }
+    /* Confetti Animation */
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
 
-        /* Confetti container */
-        #confetti-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
+    .confetti {
+      position: absolute;
+      font-size: 1.5rem; /* Size of the flower emojis */
+      animation: confetti-fall 5s linear infinite;
+    }
 
-        /* Birthday image (your girlfriend's image) */
-        #birthday-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 2s;
-        }
+    /* Birthday Container */
+    .birthday-container {
+      text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
 
-        /* Birthday message */
-        #birthday-message {
-            font-size: 2em;
-            margin-top: 20px;
-            opacity: 0;
-            transition: opacity 2s 1s;
-        }
+    .birthday-container.fade-in {
+      opacity: 1;
+    }
 
-        /* Special message */
-        #special-message {
-            font-size: 1.5em;
-            opacity: 0;
-            transition: opacity 2s 2s;
-        }
+    /* Heartfelt Message */
+    #heartfelt-message {
+      font-size: 2.5rem;
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
 
-        /* Confetti style */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
+    #heartfelt-message.fade-in {
+      opacity: 1;
+    }
 
-        /* Confetti animation */
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
+    /* Picture Slider */
+    .picture-slider {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    }
 
-        /* Transition for confetti falling animation */
-        .confetti-fall {
-            animation: confetti-fall linear infinite;
-        }
+    .picture-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
 
-    </style>
+    .picture-slider img.active {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    /* Sweet Words Animation */
+    .sweet-words {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .sweet-words.active {
+      opacity: 1;
+    }
+
+    /* Heart Pulse Animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      color: #ff69b4;
+      animation: pulse 2s infinite;
+    }
+
+    /* Button Styles */
+    .next-page-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #ff69b4;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .next-page-button:hover {
+      background: #ff1493;
+    }
+
+    /* Background Music Toggle */
+    .music-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px;
+      background: #ff69b4;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Starry Night Effect */
+    @keyframes twinkle {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+
+    /* Fireworks Animation */
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff0;
+      border-radius: 50%;
+      animation: explode 1s ease-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #heartfelt-message {
+        font-size: 1.5rem;
+      }
+
+      .picture-slider {
+        width: 200px;
+        height: 200px;
+      }
+
+      .sweet-words {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Flower Confetti -->
+  <div class="confetti" style="left: 10%; animation-delay: 0s;">🌸</div>
+  <div class="confetti" style="left: 20%; animation-delay: 1s;">🌺</div>
+  <div class="confetti" style="left: 30%; animation-delay: 2s;">🌼</div>
+  <div class="confetti" style="left: 40%; animation-delay: 3s;">🌷</div>
+  <div class="confetti" style="left: 50%; animation-delay: 4s;">💮</div>
+  <div class="confetti" style="left: 60%; animation-delay: 5s;">🌸</div>
+  <div class="confetti" style="left: 70%; animation-delay: 6s;">🌺</div>
+  <div class="confetti" style="left: 80%; animation-delay: 7s;">🌼</div>
+  <div class="confetti" style="left: 90%; animation-delay: 8s;">🌷</div>
 
-    <div id="birthday-container">
-        <!-- Confetti container -->
-        <div id="confetti-container"></div>
-
-        <!-- Birthday image (your girlfriend's picture) -->
-        <img id="birthday-image" src="img1.jpg" alt="Your Girlfriend's Image">
-
-        <!-- Birthday message -->
-        <div id="birthday-message">
-            <h1>Happy Birthday, My Love! 🎉</h1>
-        </div>
-
-        <!-- Special message -->
-        <div id="special-message">
-            <p>
-                I hope this day brings you as much joy as you bring to me every single day. 💖<br>
-                I am so grateful for every moment we spend together. You make my life brighter and more beautiful. 🌸<br>
-                You are my everything. ❤️
-            </p>
-        </div>
+  <!-- Birthday Container -->
+  <div class="birthday-container fade-in">
+    <!-- Heartfelt Message -->
+    <div id="heartfelt-message" class="fade-in">
+      To the love of my life,<br>
+      Happy Birthday! 🎉<br>
+      You are my everything. ❤️
     </div>
 
-    <script>
-        // Function to create confetti effect
-        function createConfetti() {
-            for (let i = 0; i < 100; i++) {
-                let confettiPiece = document.createElement('div');
-                confettiPiece.classList.add('confetti');
+    <!-- Picture Slider -->
+    <div class="picture-slider">
+      <img src="img1.jpg" alt="Image 1" class="active">
+      <img src="img2.jpg" alt="Image 2">
+      <img src="img3.jpg" alt="Image 3">
+      <img src="img4.jpg" alt="Image 4">
+    </div>
 
-                // Randomly set the position and color of confetti
-                confettiPiece.style.left = `${Math.random() * 100}vw`;
-                confettiPiece.style.top = `${Math.random() * -100}vh`;
-                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    <!-- Sweet Words -->
+    <div class="sweet-words active">You are my sunshine! 🌞</div>
 
-                // Random animation duration between 2s and 5s
-                confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+    <button class="next-page-button" onclick="window.location.href='next_page.html'">Next Page</button>
+  </div>
 
-                // Append confetti piece to confetti container
-                document.getElementById('confetti-container').appendChild(confettiPiece);
-                confettiPiece.classList.add('confetti-fall');
-            }
-        }
+  <!-- Heart Animation -->
+  <div class="heart" style="top: 10%; left: 10%;">❤️</div>
+  <div class="heart" style="top: 20%; left: 80%;">❤️</div>
 
-        // Function to handle the fading of elements
-        function handleAnimations() {
-            // Get elements
-            const birthdayImage = document.getElementById('birthday-image');
-            const birthdayMessage = document.getElementById('birthday-message');
-            const specialMessage = document.getElementById('special-message');
+  <!-- Background Music Toggle -->
+  <button class="music-toggle" onclick="toggleMusic()">🎵</button>
 
-            // Fade in birthday image
-            birthdayImage.style.opacity = 1;
+  <!-- Starry Night Effect -->
+  <div class="star" style="top: 5%; left: 15%;"></div>
+  <div class="star" style="top: 10%; left: 25%;"></div>
+  <div class="star" style="top: 15%; left: 35%;"></div>
+  <div class="star" style="top: 20%; left: 45%;"></div>
+  <div class="star" style="top: 25%; left: 55%;"></div>
 
-            // Fade in birthday message after image
-            setTimeout(() => {
-                birthdayMessage.style.opacity = 1;
-            }, 2000);
+  <!-- Audio Element for Background Music -->
+  <audio id="background-music" autoplay loop>
+    <source src="mp3.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-            // Fade in special message after birthday message
-            setTimeout(() => {
-                specialMessage.style.opacity = 1;
-            }, 4000);
-        }
+  <script>
+    // Fade-in Effects
+    setTimeout(() => {
+      document.getElementById('heartfelt-message').classList.add('fade-in');
+    }, 1000);
 
-        // Call the functions
-        window.onload = () => {
-            // Create confetti
-            createConfetti();
+    // Flower Confetti Generator
+    function createConfetti() {
+      const flowers = ['🌸', '🌺', '🌼', '🌷', '💮']; // Flower emojis
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.textContent = flowers[Math.floor(Math.random() * flowers.length)]; // Random flower emoji
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.animationDelay = `${Math.random() * 5}s`;
+        document.body.appendChild(confetti);
+      }
+    }
 
-            // Handle fade-in animations
-            handleAnimations();
-        };
-    </script>
+    createConfetti();
 
+    // Background Music
+    const audio = document.getElementById('background-music');
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    // Fireworks on Click
+    document.addEventListener('click', (e) => {
+      const firework = document.createElement('div');
+      firework.classList.add('firework');
+      firework.style.left = `${e.clientX}px`;
+      firework.style.top = `${e.clientY}px`;
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    });
+
+    // Picture Slider Animation
+    const images = document.querySelectorAll('.picture-slider img');
+    const sweetWords = document.querySelector('.sweet-words');
+    const messages = [
+      "You are my sunshine! 🌞",
+      "I love you to the moon and back! 🌙",
+      "You make my heart skip a beat! 💓",
+      "Forever and always, my love. 💖"
+    ];
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+      images[currentIndex].classList.remove('active');
+      sweetWords.classList.remove('active');
+
+      currentIndex = (currentIndex + 1) % images.length;
+
+      images[currentIndex].classList.add('active');
+      sweetWords.textContent = messages[currentIndex];
+      sweetWords.classList.add('active');
+    }, 3000);
+  </script>
 </body>
-
 </html>
