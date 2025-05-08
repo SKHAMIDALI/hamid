@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday, My Love!</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
   <style>
-    /* Global Styles */
     * {
       margin: 0;
       padding: 0;
@@ -18,30 +13,33 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #2e2e2e, #4b0082); /* Darker background gradient */
-      color: #ff1493; /* Bright pink text color */
+      background: linear-gradient(to bottom, #2e2e2e, #4b0082);
+      color: #ff1493;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       overflow: hidden;
       position: relative;
-      font-weight: bold; /* Bold text */
+      font-weight: bold;
     }
 
-    /* Confetti Animation */
     @keyframes confetti-fall {
-      0% { transform: translateY(-100vh) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
+      0% {
+        transform: translateX(var(--sway, 0px)) translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(var(--sway, 0px)) translateY(100vh) rotate(360deg);
+        opacity: 0.8;
+      }
     }
 
     .confetti {
       position: absolute;
-      font-size: 1.5rem; /* Size of the flower emojis */
-      animation: confetti-fall 5s linear infinite;
+      animation: confetti-fall linear;
     }
 
-    /* Birthday Container */
     .birthday-container {
       text-align: center;
       opacity: 0;
@@ -52,7 +50,6 @@
       opacity: 1;
     }
 
-    /* Heartfelt Message */
     #heartfelt-message {
       font-size: 2.5rem;
       margin-top: 20px;
@@ -64,7 +61,6 @@
       opacity: 1;
     }
 
-    /* Picture Slider */
     .picture-slider {
       position: relative;
       width: 300px;
@@ -91,7 +87,6 @@
       transform: scale(1.1);
     }
 
-    /* Sweet Words Animation */
     .sweet-words {
       font-size: 1.5rem;
       margin-top: 20px;
@@ -103,7 +98,6 @@
       opacity: 1;
     }
 
-    /* Heart Pulse Animation */
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); }
@@ -117,7 +111,6 @@
       animation: pulse 2s infinite;
     }
 
-    /* Button Styles */
     .next-page-button {
       margin-top: 30px;
       padding: 10px 20px;
@@ -134,7 +127,6 @@
       background: #ff1493;
     }
 
-    /* Background Music Toggle */
     .music-toggle {
       position: absolute;
       top: 20px;
@@ -147,7 +139,6 @@
       cursor: pointer;
     }
 
-    /* Starry Night Effect */
     @keyframes twinkle {
       0% { opacity: 0; }
       50% { opacity: 1; }
@@ -163,7 +154,6 @@
       animation: twinkle 2s infinite;
     }
 
-    /* Fireworks Animation */
     @keyframes explode {
       0% { transform: scale(0); opacity: 1; }
       100% { transform: scale(2); opacity: 0; }
@@ -178,7 +168,6 @@
       animation: explode 1s ease-out;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       #heartfelt-message {
         font-size: 1.5rem;
@@ -196,84 +185,73 @@
   </style>
 </head>
 <body>
-  <!-- Flower Confetti -->
-  <div class="confetti" style="left: 10%; animation-delay: 0s;">🌸</div>
-  <div class="confetti" style="left: 20%; animation-delay: 1s;">🌺</div>
-  <div class="confetti" style="left: 30%; animation-delay: 2s;">🌼</div>
-  <div class="confetti" style="left: 40%; animation-delay: 3s;">🌷</div>
-  <div class="confetti" style="left: 50%; animation-delay: 4s;">💮</div>
-  <div class="confetti" style="left: 60%; animation-delay: 5s;">🌸</div>
-  <div class="confetti" style="left: 70%; animation-delay: 6s;">🌺</div>
-  <div class="confetti" style="left: 80%; animation-delay: 7s;">🌼</div>
-  <div class="confetti" style="left: 90%; animation-delay: 8s;">🌷</div>
 
-  <!-- Birthday Container -->
+  <!-- Birthday Content -->
   <div class="birthday-container fade-in">
-    <!-- Heartfelt Message -->
     <div id="heartfelt-message" class="fade-in">
       To the love of my life,<br>
       Happy Birthday! 🎉<br>
-      You are my everything. ❤️
+      You are my everything. ❤
     </div>
 
-    <!-- Picture Slider -->
     <div class="picture-slider">
-      <img src="img1.jpg" alt="Image 1" class="active">
-      <img src="img2.jpg" alt="Image 2">
-      <img src="img3.jpg" alt="Image 3">
-      <img src="img4.jpg" alt="Image 4">
+      <img src="img1.jpg.jpg" alt="Image 1" class="active">
+      <img src="img2.jpg.jpg" alt="Image 2">
+      <img src="img3.jpg.jpg" alt="Image 3">
+      <img src="img4.jpg.jpg" alt="Image 4">
     </div>
 
-    <!-- Sweet Words -->
     <div class="sweet-words active">You are my sunshine! 🌞</div>
 
     <button class="next-page-button" onclick="window.location.href='next_page.html'">Next Page</button>
   </div>
 
-  <!-- Heart Animation -->
-  <div class="heart" style="top: 10%; left: 10%;">❤️</div>
-  <div class="heart" style="top: 20%; left: 80%;">❤️</div>
+  <!-- Animated Hearts -->
+  <div class="heart" style="top: 10%; left: 10%;">❤</div>
+  <div class="heart" style="top: 20%; left: 80%;">❤</div>
 
-  <!-- Background Music Toggle -->
+  <!-- Music Toggle Button -->
   <button class="music-toggle" onclick="toggleMusic()">🎵</button>
 
-  <!-- Starry Night Effect -->
+  <!-- Starry Night Background -->
   <div class="star" style="top: 5%; left: 15%;"></div>
   <div class="star" style="top: 10%; left: 25%;"></div>
   <div class="star" style="top: 15%; left: 35%;"></div>
   <div class="star" style="top: 20%; left: 45%;"></div>
   <div class="star" style="top: 25%; left: 55%;"></div>
 
-  <!-- Audio Element for Background Music -->
-  <audio id="background-music" autoplay loop>
-    <source src="mp3.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
   <script>
-    // Fade-in Effects
+    // Fade in message
     setTimeout(() => {
       document.getElementById('heartfelt-message').classList.add('fade-in');
     }, 1000);
 
-    // Flower Confetti Generator
+    // Confetti generator
     function createConfetti() {
-      const flowers = ['🌸', '🌺', '🌼', '🌷', '💮']; // Flower emojis
-      for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.textContent = flowers[Math.floor(Math.random() * flowers.length)]; // Random flower emoji
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.animationDelay = `${Math.random() * 5}s`;
-        document.body.appendChild(confetti);
-      }
+      const flowers = ['🌸', '🌺', '🌼', '🌷', '💮'];
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+      const startLeft = Math.random() * 100;
+      const sway = Math.random() * 60 - 30;
+
+      confetti.style.left = `${startLeft}%`;
+      confetti.style.top = `-5%`;
+      confetti.style.setProperty('--sway', `${sway}px`);
+      confetti.style.animationDuration = `${3 + Math.random() * 3}s`;
+      confetti.style.fontSize = `${1 + Math.random() * 1.5}rem`;
+      confetti.style.pointerEvents = 'none';
+
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
     }
 
-    createConfetti();
+    setInterval(createConfetti, 200);
 
-    // Background Music
-    const audio = document.getElementById('background-music');
-
+    // Music Toggle
+    const audio = new Audio('birthday.mp3');
+    audio.loop = true;
     function toggleMusic() {
       if (audio.paused) {
         audio.play();
@@ -282,7 +260,7 @@
       }
     }
 
-    // Fireworks on Click
+    // Firework click
     document.addEventListener('click', (e) => {
       const firework = document.createElement('div');
       firework.classList.add('firework');
@@ -292,7 +270,7 @@
       setTimeout(() => firework.remove(), 1000);
     });
 
-    // Picture Slider Animation
+    // Picture slider and messages
     const images = document.querySelectorAll('.picture-slider img');
     const sweetWords = document.querySelector('.sweet-words');
     const messages = [
@@ -301,15 +279,12 @@
       "You make my heart skip a beat! 💓",
       "Forever and always, my love. 💖"
     ];
-
     let currentIndex = 0;
 
     setInterval(() => {
       images[currentIndex].classList.remove('active');
       sweetWords.classList.remove('active');
-
       currentIndex = (currentIndex + 1) % images.length;
-
       images[currentIndex].classList.add('active');
       sweetWords.textContent = messages[currentIndex];
       sweetWords.classList.add('active');
