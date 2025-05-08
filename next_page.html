@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Greeting Card</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #4b0082, #ff69b4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      width: 320px;
+      height: 220px;
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 1.2s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #ffe6f0, #f8bbd0);
+      font-size: 2rem;
+      font-weight: bold;
+      color: #d63384;
+      padding: 20px;
+      text-align: center;
+      animation: glow 2s infinite ease-in-out, bounce 3s infinite ease;
+      border: 2px solid #ff69b4;
+    }
+
+    .card-front span {
+      background: linear-gradient(to right, #ff0080, #ff8c00);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .card-back {
+      background-color: #fff0f5;
+      transform: rotateY(180deg);
+      flex-direction: column;
+      padding: 20px;
+      color: #d63384;
+      text-align: center;
+    }
+
+    .card-back h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card-back p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #ff69b4; }
+      50% { box-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+      100% { box-shadow: 0 0 5px #ff69b4; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff69b4;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="heart" style="left: 20%; animation-delay: 0s;">💖</div>
+  <div class="heart" style="left: 40%; animation-delay: 1s;">💕</div>
+  <div class="heart" style="left: 60%; animation-delay: 2s;">💗</div>
+  <div class="heart" style="left: 80%; animation-delay: 3s;">❤️</div>
+
+  <!-- Greeting Card -->
+  <div class="card" onclick="this.classList.toggle('flipped')">
+    <div class="card-inner">
+      <div class="card-front">
+        💖 <span>Tap to Open</span> 💖
+      </div>
+      <div class="card-back">
+        <h2>Happy Birthday, My Love! 🎉</h2>
+        <p>
+          You make every moment magical.<br />
+          On your special day, I just want you to know...<br />
+          You are cherished, adored, and endlessly loved. 💘
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    // Music player
+    const audio = new Audio('birthday.mp3');
+    audio.loop = true;
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    // Prevent card flip on button click
+    function goBack(event) {
+      event.stopPropagation();
+      window.location.href = 'index.html'; // Change to your homepage
+    }
+  </script>
+
+</body>
+</html>
