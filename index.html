@@ -1,296 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday, My Love!</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Happy Birth Day love</title>	    
+    <link type="text/css" rel="stylesheet" href="default.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jscex.min.js"></script>
+    <script type="text/javascript" src="jscex-parser.js"></script>
+    <script type="text/javascript" src="jscex-jit.js"></script>
+    <script type="text/javascript" src="jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="jscex-async.min.js"></script>
+    <script type="text/javascript" src="jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="love.js" charset="utf-8"></script>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+    <style>
+        .next-button {
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #ff5e8e;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(255, 94, 142, 0.4);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        .next-button:hover {
+            background-color: #ff3d71;
+            transform: scale(1.05);
+        }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #2e2e2e, #4b0082);
-      color: #ff1493;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-      position: relative;
-      font-weight: bold;
-    }
-
-    @keyframes confetti-fall {
-      0% {
-        transform: translateX(var(--sway, 0px)) translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(var(--sway, 0px)) translateY(100vh) rotate(360deg);
-        opacity: 0.8;
-      }
-    }
-
-    .confetti {
-      position: absolute;
-      animation: confetti-fall linear;
-    }
-
-    .birthday-container {
-      text-align: center;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-    }
-
-    .birthday-container.fade-in {
-      opacity: 1;
-    }
-
-    #heartfelt-message {
-      font-size: 2.5rem;
-      margin-top: 20px;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-    }
-
-    #heartfelt-message.fade-in {
-      opacity: 1;
-    }
-
-    .picture-slider {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      margin: 20px auto;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-    }
-
-    .picture-slider img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    }
-
-    .picture-slider img.active {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    .sweet-words {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .sweet-words.active {
-      opacity: 1;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    .heart {
-      position: absolute;
-      font-size: 2rem;
-      color: #ff69b4;
-      animation: pulse 2s infinite;
-    }
-
-    .next-page-button {
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background: #ff69b4;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease-in-out;
-    }
-
-    .next-page-button:hover {
-      background: #ff1493;
-    }
-
-    .music-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px;
-      background: #ff69b4;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle 2s infinite;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
-
-    .firework {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #ff0;
-      border-radius: 50%;
-      animation: explode 1s ease-out;
-    }
-
-    @media (max-width: 768px) {
-      #heartfelt-message {
-        font-size: 1.5rem;
-      }
-
-      .picture-slider {
-        width: 200px;
-        height: 200px;
-      }
-
-      .sweet-words {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+        .button-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+    </style>
 </head>
 <body>
+    <div id="main">
+        <div id="error">
+            <a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> 
+            (<a href="http://firefox.com.cn/download/">Firefox</a>)
+        </div>
 
-  <!-- Birthday Content -->
-  <div class="birthday-container fade-in">
-    <div id="heartfelt-message" class="fade-in">
-      To the love of my life,<br>
-      Happy Birthday! 🎉<br>
-      You are my everything. ❤
+        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+            <source src="mp3.mp3" type="audio/mp3" />
+            <embed height="100" width="100" src="mp3.mp3" />
+        </audio>
+
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">This is 12 th May the birthday of 💞</span><br>
+                    <span class="say">My beautiful wife 💞</span><br>
+                    <span class="say">Happy Birthday 🎈</span><br>
+                    <span class="say">May Allah bless you 🍀</span><br>
+                    <span class="say">And give u many happiness 💕</span><br>
+                    <span class="say">I loved you ❤️</span><br>
+                    <span class="say">And I will always love u 🥺 ❤️</span><br>
+                    <span class="say">Hope u have a great day today ❤️😘</span><br>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span>
+            </div>
+            <canvas id="canvas" width="1100" height="680"></canvas>
+        </div>
+
+        <!-- Next Page Button -->
+        <div class="button-container">
+            <button class="next-button" onclick="window.location.href='page2.html'">
+                💌 Next Page
+            </button>
+        </div>
     </div>
 
-    <div class="picture-slider">
-      <img src="img1.jpg" alt="Image 1" class="active">
-      <img src="img2.jpg" alt="Image 2">
-      <img src="img3.jpg" alt="Image 3">
-      <img src="img4.jpg" alt="Image 4">
-    </div>
+    <script>
+    (function() {
+        var canvas = $('#canvas');
 
-    <div class="sweet-words active">You are my sunshine! 🌞</div>
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
 
-    <button class="next-page-button" onclick="window.location.href='next_page.html'">Next Page</button>
-  </div>
+        var width = canvas.width();
+        var height = canvas.height();        
+        canvas.attr("width", width);
+        canvas.attr("height", height);
 
-  <!-- Animated Hearts -->
-  <div class="heart" style="top: 10%; left: 10%;">❤</div>
-  <div class="heart" style="top: 20%; left: 80%;">❤</div>
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]] 
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
+        }
 
-  <!-- Music Toggle Button -->
-  <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
 
-  <!-- Starry Night Background -->
-  <div class="star" style="top: 5%; left: 15%;"></div>
-  <div class="star" style="top: 10%; left: 25%;"></div>
-  <div class="star" style="top: 15%; left: 35%;"></div>
-  <div class="star" style="top: 20%; left: 45%;"></div>
-  <div class="star" style="top: 25%; left: 55%;"></div>
+        canvas.click(function(e) {
+            playAudio();
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0; 
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }).mousemove(function(e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
 
-  <script>
-    // Fade in message
-    setTimeout(() => {
-      document.getElementById('heartfelt-message').classList.add('fade-in');
-    }, 1000);
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
 
-    // Confetti generator
-    function createConfetti() {
-      const flowers = ['🌸', '🌺', '🌼', '🌷', '💮'];
-      const confetti = document.createElement('div');
-      confetti.classList.add('confetti');
-      confetti.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
 
-      const startLeft = Math.random() * 100;
-      const sway = Math.random() * 60 - 30;
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
 
-      confetti.style.left = `${startLeft}%`;
-      confetti.style.top = `-5%`;
-      confetti.style.setProperty('--sway', `${sway}px`);
-      confetti.style.animationDuration = `${3 + Math.random() * 3}s`;
-      confetti.style.fontSize = `${1 + Math.random() * 1.5}rem`;
-      confetti.style.pointerEvents = 'none';
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
 
-      document.body.appendChild(confetti);
-      setTimeout(() => confetti.remove(), 6000);
-    }
+            canvas.parent().css("background", "url(" + tree.toDataURL('heart.jpg') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
 
-    setInterval(createConfetti, 200);
+        var textAnimate = eval(Jscex.compile("async", function () {
+            $("#code").show().typewriter();
+        }));
+	    
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+            textAnimate().start();
+        }));
 
-    // Music Toggle
-    const audio = new Audio('birthday.mp3');
-    audio.loop = true;
-    function toggleMusic() {
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-
-    // Firework click
-    document.addEventListener('click', (e) => {
-      const firework = document.createElement('div');
-      firework.classList.add('firework');
-      firework.style.left = `${e.clientX}px`;
-      firework.style.top = `${e.clientY}px`;
-      document.body.appendChild(firework);
-      setTimeout(() => firework.remove(), 1000);
-    });
-
-    // Picture slider and messages
-    const images = document.querySelectorAll('.picture-slider img');
-    const sweetWords = document.querySelector('.sweet-words');
-    const messages = [
-      "You are my sunshine! 🌞",
-      "I love you to the moon and back! 🌙",
-      "You make my heart skip a beat! 💓",
-      "Forever and always, my love. 💖"
-    ];
-    let currentIndex = 0;
-
-    setInterval(() => {
-      images[currentIndex].classList.remove('active');
-      sweetWords.classList.remove('active');
-      currentIndex = (currentIndex + 1) % images.length;
-      images[currentIndex].classList.add('active');
-      sweetWords.textContent = messages[currentIndex];
-      sweetWords.classList.add('active');
-    }, 3000);
-  </script>
+        runAsync().start();
+    })();
+    </script>
 </body>
 </html>
