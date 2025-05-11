@@ -32,7 +32,7 @@ body {
   }
   #code {
     display: none;
-    color: rgb(196, 255, 255);
+    color: #E6E6FA;
     font-size: 16px;
     margin-top: 70px;
     line-height: 25px;
